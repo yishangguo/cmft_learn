@@ -1,0 +1,61 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<p>input</p >
+
+
+name1:<input id="name1" type="text" /><br />
+name2:<input id="name2" type="text" /><br />
+<input type="button" value="send" id="sub"/>
+
+
+</body>
+
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+
+<script type="text/javascript">
+       
+        var name1=document.getElementById('name1'),　　　　 
+            name2=document.getElementById('name2'),
+            subBtn=document.getElementById('sub');
+               
+            subBtn.onclick=function(){
+            subName();
+        }
+       
+        function subName(){
+
+            var xhr=new XMLHttpRequest();
+
+            xhr.open('POST','/testHello2');
+
+            var data='name1='+name1.value
+                +'&name2='+name2.value;
+
+            //在open和send之间设置Content-Type
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+            xhr.send(data);
+
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status=200){
+                        var data=JSON.parse(xhr.responseText);
+                        if(data.success){
+                            alert("OK~~~~");
+                                                 
+                        }else{
+                           alert("error")
+                        }
+                    }else{
+                        alert('发生错误！'+xhr.status)
+                    }
+                }
+            }
+        }
+   
+</script>
+</html>

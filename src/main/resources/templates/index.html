@@ -1,0 +1,44 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<p>input</p >
+
+
+name1:<input id="name1" type="text" /><br />
+name2:<input id="name2" type="text" /><br />
+<input type="button" value="send" id="sub"/>
+
+
+</body>
+
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+
+<script type="text/javascript">
+$(function(){
+    //按钮单击时执行
+    $("#sub").click(function(){
+          //取Ajax返回结果
+        	  var name1 = $("#name1").val();
+        	  var name2 = $("#name2").val();
+        	  alert(name1+" "+name2);
+        	  $.ajax({
+        		  url:"/testHello",
+                  type:"post",
+                  data:"&name1="+name1+"&name2="+name2,    
+                  dataType:"json",
+                  success:function (data) {
+                     alert("OK~~~");
+                  } 
+        	  })
+        		 
+          })
+          
+          
+     });
+
+
+</script>
+</html>
